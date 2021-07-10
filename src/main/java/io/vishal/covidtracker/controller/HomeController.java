@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -19,12 +21,11 @@ public class HomeController {
     public String home(Model model) {
         List<LocationStats> allStats = dataService.getAllStats();
         int totalReportedCases = allStats.stream().mapToInt(stat -> stat.getLatestTotalCases()).sum();
-        int newCases = allStats.stream().mapToInt(stat -> stat.getDiffFromPreviousDay()).sum();
         model.addAttribute("locationStats", allStats);
         model.addAttribute("totalReportedCases", totalReportedCases);
-        model.addAttribute("newCases", newCases);
+        model.addAttribute("currentDate", LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
-        return "home";
+        return "";
     }
 
 }

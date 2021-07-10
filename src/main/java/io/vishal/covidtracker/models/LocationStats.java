@@ -2,17 +2,35 @@ package io.vishal.covidtracker.models;
 
 public class LocationStats {
 
-    private String state;
+    private String date;
+    private String prevDate;
+    private String prevPrevDate;
     private String country;
     private int latestTotalCases;
     private int diffFromPreviousDay;
 
-    public String getState() {
-        return state;
+    public String getPrevDate() {
+        return prevDate;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setPrevDate(String prevDate) {
+        this.prevDate = prevDate;
+    }
+
+    public String getPrevPrevDate() {
+        return prevPrevDate;
+    }
+
+    public void setPrevPrevDate(String prevPrevDate) {
+        this.prevPrevDate = prevPrevDate;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getCountry() {
@@ -42,7 +60,9 @@ public class LocationStats {
     @Override
     public String toString() {
         return "LocationStats{" +
-                "state='" + state + '\'' +
+                "date='" + date + '\'' +
+                ", prevDate='" + prevDate + '\'' +
+                ", prevPrevDate='" + prevPrevDate + '\'' +
                 ", country='" + country + '\'' +
                 ", latestTotalCases=" + latestTotalCases +
                 ", diffFromPreviousDay=" + diffFromPreviousDay +
