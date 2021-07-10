@@ -18,20 +18,26 @@
             <h1 class="display-3 fw-bold" th:text="${totalReportedCases}"></h1>
             <p class="col-md-8 fs-4">Total cases reported as of today</p>
             <hr>
+            <p>
+                <span class="display-6 fw-bold" th:text="${newCases}"></span>
+                <span class="fs-5"> new cases reported since previous day</span>
+
+            </p>
         </div>
     </div>
 
-        <table class="table">
-            <tr>
-                <th>Country</th>
-                <th>Total Cases Reported On <span th:text="${currentDate}"></span></th>
-
-            </tr>
-            <tr th:each="locationStat : ${locationStats}">
-                <td th:text="${locationStat.country}"></td>
-                <td th:text="${locationStat.latestTotalCases}">0</td>
-            </tr>
-        </table>
+    <table class="table">
+        <tr>
+            <th>Country</th>
+            <th>Total Cases Reported</th>
+            <th>Changes since last day</th>
+        </tr>
+        <tr th:each="locationStat : ${locationStats}">
+            <td th:text="${locationStat.country}"></td>
+            <td th:text="${locationStat.latestTotalCases}">0</td>
+<!--            <td th:text="${locationStat.diffFromPreviousDay}">0</td>-->
+        </tr>
+    </table>
 
     </body>
 </div>
