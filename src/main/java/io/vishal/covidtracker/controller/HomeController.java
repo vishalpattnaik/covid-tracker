@@ -24,6 +24,8 @@ public class HomeController {
         model.addAttribute("locationStats", allStats);
         model.addAttribute("totalReportedCases", totalReportedCases);
         model.addAttribute("currentDate", LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        model.addAttribute("prevDate", LocalDate.now().minusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        model.addAttribute("prevPrevDate", LocalDate.now().minusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
         return "home";
     }

@@ -31,8 +31,8 @@ public class DataService {
     }
 
     @PostConstruct
-    @Scheduled(cron = "* * 1 * * *")
-    public  void fetchData() throws IOException, InterruptedException, ParseException {
+    @Scheduled(cron = "* * 13 * * *")
+    public  void fetchData() throws IOException, InterruptedException {
         List<LocationStats> newStats = new ArrayList<>();
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(RAW_DATA_URL)).build();
@@ -41,20 +41,32 @@ public class DataService {
         StringReader csvReader = new StringReader(httpResponse.body());
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvReader);
         String date = LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String prevDate = LocalDate.now().minusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String prevPrevDate = LocalDate.now().minusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocationStats locationStats = new LocationStats();
         for (CSVRecord record : records) {
-            LocationStats locationStats = new LocationStats();
             String recordDate = record.get("Date");
             if(recordDate.equals(date)) {
                 locationStats.setDate(record.get("Date"));
-//                locationStats.setPrevDate(LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
                 locationStats.setCountry(record.get("Country"));
                 locationStats.setLatestTotalCases(Integer.parseInt(record.get("Confirmed")));
                 newStats.add(locationStats);
+                locationStats = new LocationStats();
             }
 
-        }
-        this.allStats = newStats;
+            else if(recordDate.equals(prevDate)) {
+                locationStats.setPrevDate(record.get("Date"));
+                locationStats.setLatestPrevDayCases(Integer.parseInt(record.get("Confirmed")));
 
+            }
+            else if(recordDate.equals(prevPrevDate)) {
+                locationStats.setPrevPrevDate(record.get("Date"));
+                locationStats.setLatestPrevPrevDayCases(Integer.parseInt(record.get("Confirmed")));
+            }
+        }
+
+        this.allStats = newStats;
     }
+
 
 }

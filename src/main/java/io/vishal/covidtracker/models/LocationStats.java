@@ -7,7 +7,24 @@ public class LocationStats {
     private String prevPrevDate;
     private String country;
     private int latestTotalCases;
-    private int diffFromPreviousDay;
+    private int latestPrevDayCases;
+    private int latestPrevPrevDayCases;
+
+    public int getLatestPrevDayCases() {
+        return latestPrevDayCases;
+    }
+
+    public void setLatestPrevDayCases(int latestPrevDayCases) {
+        this.latestPrevDayCases = latestPrevDayCases;
+    }
+
+    public int getLatestPrevPrevDayCases() {
+        return latestPrevPrevDayCases;
+    }
+
+    public void setLatestPrevPrevDayCases(int latestPrevPrevDayCases) {
+        this.latestPrevPrevDayCases = latestPrevPrevDayCases;
+    }
 
     public String getPrevDate() {
         return prevDate;
@@ -49,14 +66,6 @@ public class LocationStats {
         this.latestTotalCases = latestTotalCases;
     }
 
-    public int getDiffFromPreviousDay() {
-        return diffFromPreviousDay;
-    }
-
-    public void setDiffFromPreviousDay(int diffFromPreviousDay) {
-        this.diffFromPreviousDay = diffFromPreviousDay;
-    }
-
     @Override
     public String toString() {
         return "LocationStats{" +
@@ -65,7 +74,8 @@ public class LocationStats {
                 ", prevPrevDate='" + prevPrevDate + '\'' +
                 ", country='" + country + '\'' +
                 ", latestTotalCases=" + latestTotalCases +
-                ", diffFromPreviousDay=" + diffFromPreviousDay +
+                ", latestPrevDayCases=" + latestPrevDayCases +
+                ", latestPrevPrevDayCases=" + latestPrevPrevDayCases +
                 '}';
     }
 }

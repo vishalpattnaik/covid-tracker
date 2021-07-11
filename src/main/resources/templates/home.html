@@ -24,11 +24,19 @@
     <table class="table">
         <tr>
             <th>Country</th>
-            <th>Total Cases Reported</th>
+            <th>Total Cases as of</th>
+            <th th:text="${currentDate}"></th>
+            <th th:text="${prevDate}"></th>
+            <th th:text="${prevPrevDate}"></th>
+
         </tr>
         <tr th:each="locationStat : ${locationStats}">
             <td th:text="${locationStat.country}"></td>
+            <td></td>
             <td th:text="${locationStat.latestTotalCases}">0</td>
+            <td th:text="${locationStat.latestPrevDayCases}">0</td>
+            <td th:text="${locationStat.latestPrevPrevDayCases}">0</td>
+
         </tr>
     </table>
 
