@@ -41,32 +41,20 @@ public class DataService {
         StringReader csvReader = new StringReader(httpResponse.body());
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvReader);
         String date = LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String prevDate = LocalDate.now().minusDays(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        String prevPrevDate = LocalDate.now().minusDays(3).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        LocationStats locationStats = new LocationStats();
         for (CSVRecord record : records) {
+            LocationStats locationStats = new LocationStats();
             String recordDate = record.get("Date");
-            if(recordDate.equals(date)) {
+            if (recordDate.equals(date)) {
                 locationStats.setDate(record.get("Date"));
                 locationStats.setCountry(record.get("Country"));
                 locationStats.setLatestTotalCases(Integer.parseInt(record.get("Confirmed")));
+                locationStats.setRecoveredCases(Integer.parseInt(record.get("Recovered")));
+                locationStats.setDeaths(Integer.parseInt(record.get("Deaths")));
                 newStats.add(locationStats);
-                locationStats = new LocationStats();
-            }
-
-            else if(recordDate.equals(prevDate)) {
-                locationStats.setPrevDate(record.get("Date"));
-                locationStats.setLatestPrevDayCases(Integer.parseInt(record.get("Confirmed")));
-
-            }
-            else if(recordDate.equals(prevPrevDate)) {
-                locationStats.setPrevPrevDate(record.get("Date"));
-                locationStats.setLatestPrevPrevDayCases(Integer.parseInt(record.get("Confirmed")));
             }
         }
 
         this.allStats = newStats;
+
     }
-
-
 }

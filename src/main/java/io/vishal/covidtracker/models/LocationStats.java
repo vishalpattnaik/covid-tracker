@@ -3,43 +3,33 @@ package io.vishal.covidtracker.models;
 public class LocationStats {
 
     private String date;
-    private String prevDate;
-    private String prevPrevDate;
     private String country;
     private int latestTotalCases;
-    private int latestPrevDayCases;
-    private int latestPrevPrevDayCases;
+    private int recoveredCases;
+    private int deaths;
 
-    public int getLatestPrevDayCases() {
-        return latestPrevDayCases;
+    public int getLatestTotalCases() {
+        return latestTotalCases;
     }
 
-    public void setLatestPrevDayCases(int latestPrevDayCases) {
-        this.latestPrevDayCases = latestPrevDayCases;
+    public void setLatestTotalCases(int latestTotalCases) {
+        this.latestTotalCases = latestTotalCases;
     }
 
-    public int getLatestPrevPrevDayCases() {
-        return latestPrevPrevDayCases;
+    public int getRecoveredCases() {
+        return recoveredCases;
     }
 
-    public void setLatestPrevPrevDayCases(int latestPrevPrevDayCases) {
-        this.latestPrevPrevDayCases = latestPrevPrevDayCases;
+    public void setRecoveredCases(int recoveredCases) {
+        this.recoveredCases = recoveredCases;
     }
 
-    public String getPrevDate() {
-        return prevDate;
+    public int getDeaths() {
+        return deaths;
     }
 
-    public void setPrevDate(String prevDate) {
-        this.prevDate = prevDate;
-    }
-
-    public String getPrevPrevDate() {
-        return prevPrevDate;
-    }
-
-    public void setPrevPrevDate(String prevPrevDate) {
-        this.prevPrevDate = prevPrevDate;
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
     }
 
     public String getDate() {
@@ -58,24 +48,15 @@ public class LocationStats {
         this.country = country;
     }
 
-    public int getLatestTotalCases() {
-        return latestTotalCases;
-    }
-
-    public void setLatestTotalCases(int latestTotalCases) {
-        this.latestTotalCases = latestTotalCases;
-    }
 
     @Override
     public String toString() {
         return "LocationStats{" +
                 "date='" + date + '\'' +
-                ", prevDate='" + prevDate + '\'' +
-                ", prevPrevDate='" + prevPrevDate + '\'' +
                 ", country='" + country + '\'' +
                 ", latestTotalCases=" + latestTotalCases +
-                ", latestPrevDayCases=" + latestPrevDayCases +
-                ", latestPrevPrevDayCases=" + latestPrevPrevDayCases +
+                ", recoveredCases=" + recoveredCases +
+                ", deaths=" + deaths +
                 '}';
     }
 }
