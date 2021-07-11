@@ -31,8 +31,8 @@ public class DataService {
     }
 
     @PostConstruct
-    @Scheduled(cron = "* * 1 * * *")
-    public  void fetchData() throws IOException, InterruptedException, ParseException {
+    @Scheduled(cron = "* * 13 * * *")
+    public  void fetchData() throws IOException, InterruptedException {
         List<LocationStats> newStats = new ArrayList<>();
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(RAW_DATA_URL)).build();
@@ -44,17 +44,17 @@ public class DataService {
         for (CSVRecord record : records) {
             LocationStats locationStats = new LocationStats();
             String recordDate = record.get("Date");
-            if(recordDate.equals(date)) {
+            if (recordDate.equals(date)) {
                 locationStats.setDate(record.get("Date"));
-//                locationStats.setPrevDate(LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
                 locationStats.setCountry(record.get("Country"));
                 locationStats.setLatestTotalCases(Integer.parseInt(record.get("Confirmed")));
+                locationStats.setRecoveredCases(Integer.parseInt(record.get("Recovered")));
+                locationStats.setDeaths(Integer.parseInt(record.get("Deaths")));
                 newStats.add(locationStats);
             }
-
         }
+
         this.allStats = newStats;
 
     }
-
 }
